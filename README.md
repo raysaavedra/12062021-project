@@ -1,5 +1,8 @@
 # 12062021-project
 
+- sample project using django as backend and reactjs for frontend
+- Python Django, Reactjs, Typescript
+
 # Backend
 
 ## How to run
