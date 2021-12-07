@@ -15,12 +15,11 @@ class PropertyListView(generics.ListAPIView):
     filterset_fields = ("id",)
 
     def get_queryset(self):
-        print(self.kwargs)
         exclude = self.request.query_params.get("exclude")
         query = Property.objects.all().filter(is_active=True).order_by("-updated_at")
 
         if exclude:
-            query.exclude(pk=exclude)
+            query = query.exclude(pk=exclude)
         return query
 
 
