@@ -30,7 +30,6 @@ class UserBidSerializer(serializers.ModelSerializer):
                 .order_by("-current_bid")
                 .first()
             )
-            print(property)
             if property.get("user__pk") == pk:
                 winning += 1
             else:
