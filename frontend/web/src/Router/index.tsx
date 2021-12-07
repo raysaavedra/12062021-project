@@ -6,11 +6,13 @@ import {
 
 import { MainLayout } from "../Layouts";
 import { Home } from "../Components/Home";
+import { NotFound } from "../Components/Shared/NotFound";
 import { Detail as PropertyDetail } from "../Components/Property/Detail";
 
 export enum ROUTES {
   HOME = "/*",
   PROPERTY_DETAIL = "property/:id",
+  NOT_FOUND = "/404",
 }
 
 interface Route {
@@ -28,6 +30,11 @@ export const routes: Route[] = [
   {
     path: ROUTES.PROPERTY_DETAIL,
     component: PropertyDetail,
+    layout: MainLayout,
+  },
+  {
+    path: ROUTES.NOT_FOUND,
+    component: NotFound,
     layout: MainLayout,
   },
 ];

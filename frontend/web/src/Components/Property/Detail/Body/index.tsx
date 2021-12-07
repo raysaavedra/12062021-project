@@ -1,9 +1,11 @@
+import { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import LeftDialImg from "../../../../Assets/left-dial.png";
 import RightDialImg from "../../../../Assets/right-dial.png";
 import ForSaleSignImg from "../../../../Assets/for-sale-sign.png";
+import { Property } from "../../../../Interface";
 
 const useStyles = makeStyles({
   container: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles({
   },
   neighborTxt: {
     color: "#6AC1FF",
-    weight: "500",
+    weight: "bold !important",
     fontSize: "18px !important",
   },
   forSaleContainer: {
@@ -47,7 +49,7 @@ const useStyles = makeStyles({
   publicAuctionTxt: {
     color: "#171518",
     fontSize: "23px !important",
-    fontWeight: 300,
+    fontWeight: "bold !important",
   },
   publicAuctionInner: {
     position: "absolute",
@@ -59,7 +61,7 @@ const useStyles = makeStyles({
   marketValueTxt: {
     color: "#171518",
     fontSize: "21px !important",
-    fontWeight: 300,
+    fontWeight: "bold !important",
   },
   address1Txt: {
     color: "#171518",
@@ -77,7 +79,11 @@ const useStyles = makeStyles({
   },
 });
 
-export const Body = () => {
+interface BodyProps {
+  property: Property;
+}
+
+export const Body: FC<BodyProps> = ({ property }) => {
   const classes = useStyles();
 
   return (
@@ -101,15 +107,17 @@ export const Body = () => {
       </Box>
       <Box className={classes.publicAuctionInner}>
         <Typography className={classes.marketValueTxt}>
-          Market Value $40,000
+          {`Market Value $${property.market_value}`}
         </Typography>
 
-        <Typography className={classes.address1Txt}>14 Flood St.</Typography>
+        <Typography className={classes.address1Txt}>
+          {property.address}
+        </Typography>
         <Typography className={classes.address2Txt}>
-          New Orleans, LA 70122
+          {`${property.city}, ${property.state} ${property.zip}`}
         </Typography>
         <Typography className={classes.reserveBidTxt}>
-          Reserve Bid $5,000
+          {`Reserve Bid $${property.reserve_price}`}
         </Typography>
       </Box>
     </Box>

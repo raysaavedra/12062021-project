@@ -26,7 +26,7 @@ export const muiTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Poppins ,Roboto, Helvetica, sans-serif",
+    fontFamily: "Poppins",
   },
   mixins: {
     toolbar: {

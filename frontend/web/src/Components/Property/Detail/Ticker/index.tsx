@@ -1,5 +1,12 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { FC } from "react";
+import { Box, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+
+import { Stat } from "./Stat";
+import { List } from "./List";
+import { useTicker } from "./useTicker";
+import { useGetUserBids } from "./useGetUserBids";
+import { Property } from "../../../../Interface";
 
 const useStyles = makeStyles({
   container: {
@@ -13,107 +20,59 @@ const useStyles = makeStyles({
     background: "#FFFFFF",
   },
   statsGrid: {
-    padding: "5px 30px",
+    padding: "5px 23px",
   },
   listContainer: {
     background: "rgba(255, 255, 255, 0.5)",
   },
-  bold: {
-    fontWeight: 500,
-    fontSize: "18px !important",
-    color: "#171518",
-  },
 });
 
-export const Ticker = () => {
+interface TickerProps {
+  property: Property;
+}
+
+export const Ticker: FC<TickerProps> = ({ property }) => {
   const classes = useStyles();
+  const { properties } = useTicker(property.id);
+  const { userBids } = useGetUserBids();
 
   return (
     <Box className={classes.container}>
       <Box className={classes.statsContainer}>
         <Grid container className={classes.statsGrid}>
           <Grid item xs={4}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Typography className={classes.bold}>Outbid</Typography>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-left"
-              padding={`${0} 32px`}
-            >
-              <Typography>4</Typography>
-            </Box>
+            <Stat name="Outbid" value={userBids.outbid} useRed />
           </Grid>
           <Grid item xs={4}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Typography className={classes.bold}>Active</Typography>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-left"
-              padding={`${0} 32px`}
-            >
-              <Typography>4</Typography>
-            </Box>
+            <Stat name="Active" value={userBids.active} useDefault />
           </Grid>
           <Grid item xs={4}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Typography className={classes.bold}>Winning</Typography>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-left"
-              padding={`${0} 32px`}
-            >
-              <Typography>4</Typography>
-            </Box>
+            <Stat name="Winning" value={userBids.winning} />
           </Grid>
         </Grid>
       </Box>
-      <Box className={classes.listContainer} flexGrow={1}></Box>
+      <Box className={classes.listContainer} flexGrow={1}>
+        <List properties={properties} />
+      </Box>
       <Box className={classes.statsContainer}>
         <Grid container className={classes.statsGrid}>
           <Grid item xs={4}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Typography className={classes.bold}>Winning</Typography>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-left"
-              padding={`${0} 32px`}
-            >
-              <Typography>4</Typography>
-            </Box>
+            <Stat name="Winning" value={property.winning_bid} withDollar />
           </Grid>
           <Grid item xs={4}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Typography className={classes.bold}>Active</Typography>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-left"
-              padding={`${0} 32px`}
-            >
-              <Typography>4</Typography>
-            </Box>
+            <Stat
+              name="Active"
+              value={property.current_user_bid.active}
+              useDefault
+              withDollar
+            />
           </Grid>
           <Grid item xs={4}>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Typography className={classes.bold}>Outbid</Typography>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-left"
-              padding={`${0} 32px`}
-            >
-              <Typography>4</Typography>
-            </Box>
+            <Stat
+              name="Outbid"
+              value={property.current_user_bid.outbid}
+              withDollar
+            />
           </Grid>
         </Grid>
       </Box>

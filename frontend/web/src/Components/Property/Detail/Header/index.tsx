@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { FC } from "react";
+import { Box, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import ListViewImg from "../../../../Assets/list-view.png";
@@ -6,6 +7,8 @@ import HouseBundleImg from "../../../../Assets/house-bundle.png";
 import MapPinImg from "../../../../Assets/map-pin.png";
 import WishlistImg from "../../../../Assets/wishlist.png";
 import BlueHouseImg from "../../../../Assets/blue-house.png";
+import { Property } from "../../../../Interface";
+import { HeaderTextItem } from "./HeaderTextItem";
 
 const useStyles = makeStyles({
   header: {
@@ -27,15 +30,22 @@ const useStyles = makeStyles({
   textItemPadding: {
     width: "456px",
   },
+  clickable: {
+    cursor: "pointer",
+  },
 });
 
-export const Header = () => {
+interface HeaderProps {
+  property: Property;
+}
+
+export const Header: FC<HeaderProps> = ({ property }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.header}>
       <Grid container className={classes.headerInnerContainer}>
-        <Grid item>
+        <Grid item className={classes.clickable}>
           <Box
             height="100%"
             display="flex"
@@ -47,36 +57,14 @@ export const Header = () => {
           </Box>
         </Grid>
         <Grid item className={classes.textItemPadding}>
-          <Grid
-            container
-            direction="column"
-            className={classes.gridContainer}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item>
-              <Typography>Own</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>14 Flood St.</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>New Orleans, LA 70122</Typography>
-            </Grid>
-            <Grid item>
-              <Box
-                height="100%"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <img src={HouseBundleImg} alt="house-bundle" />
-              </Box>
-            </Grid>
-          </Grid>
+          <HeaderTextItem
+            topText="Own"
+            middleText={property.address}
+            bottomText={`${property.city}, ${property.state} ${property.zip} `}
+            extraBottomIcon={<img src={HouseBundleImg} alt="house" />}
+          />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.clickable}>
           <Box
             height="100%"
             display="flex"
@@ -87,27 +75,17 @@ export const Header = () => {
             <img src={MapPinImg} alt="map-pin" />
           </Box>
         </Grid>
-        <Grid item className={classes.textItemPadding}>
-          <Grid
-            container
-            direction="column"
-            className={classes.gridContainer}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item>
-              <Typography>To</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>Start</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>Place Deposit</Typography>
-            </Grid>
-          </Grid>
+        <Grid
+          item
+          className={`${classes.textItemPadding} ${classes.clickable}`}
+        >
+          <HeaderTextItem
+            topText="To"
+            middleText="Start"
+            bottomText="Place Deposit"
+          />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.clickable}>
           <Box
             height="100%"
             display="flex"
@@ -119,26 +97,13 @@ export const Header = () => {
           </Box>
         </Grid>
         <Grid item className={classes.textItemPadding}>
-          <Grid
-            container
-            direction="column"
-            className={classes.gridContainer}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item>
-              <Typography>Market Value $40,000</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>$5,000</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>Reserve Price</Typography>
-            </Grid>
-          </Grid>
+          <HeaderTextItem
+            topText={`Market Value $${property.market_value}`}
+            middleText={`$${property.reserve_price}`}
+            bottomText="Reserve Price"
+          />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.clickable}>
           <Box
             height="100%"
             display="flex"
