@@ -19,9 +19,21 @@
     ./manage.py runserver
 ```
 
-## API Docs
+### API Urls
+
+- http://127.0.0.1:8000/api/v1/property/1/
+- http://127.0.0.1:8000/api/v1/property/?exclude=1
+- http://127.0.0.1:8000/api/v1/users/2/bids
+
+### API Docs
 
 - http://127.0.0.1:8000/api/docs
+
+#### Notes
+
+- db used is just sqlite3 so you don't have to setup the db anymore
+
+---
 
 # Frontend
 
