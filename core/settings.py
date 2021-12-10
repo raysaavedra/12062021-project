@@ -10,10 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = environ.Path(__file__) - 2
+env = environ.Env()
+env_file = str(ROOT_DIR.path(".env"))
+env.read_env(env_file)
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,9 +30,8 @@ SECRET_KEY = "django-insecure-w%6n1*db%t!@r6@p5v3qvpkqe2v$)+_)wukv^e^7_z6e4e@4zb
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:3000", "http://localhost:3000"]
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
+CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS")
 
 
 # Application definition
