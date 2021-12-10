@@ -7,6 +7,14 @@
 
 ## How to run
 
+### Create env file first
+
+```
+    cp env.sample .env
+    vim .env
+    add values on .env
+```
+
 ```
     cd backend
     activate virtualenv
@@ -36,6 +44,14 @@
 ---
 
 # Frontend
+
+### Create env file first
+
+```
+    cp env.sample .env
+    vim .env
+    add values on .env
+```
 
 ```
     cd frontend
