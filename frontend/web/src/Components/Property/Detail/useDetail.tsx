@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxios from "axios-hooks";
 
+import { Config } from "../../../Config";
 import { Property } from "../../../Interface";
 import { ROUTES } from "../../../Router";
 
@@ -24,7 +25,7 @@ export const useDetail = (id: string | undefined) => {
   };
 
   const [{ data, loading, error }, refetch] = useAxios(
-    `http://127.0.0.1:8000/api/v1/property/${id}`
+    `${Config.API_URL}/property/${id}`
   );
 
   const [property, setProperty] = useState<Property>(initialData);

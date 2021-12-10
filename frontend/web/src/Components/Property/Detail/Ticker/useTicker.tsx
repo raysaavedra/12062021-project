@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxios from "axios-hooks";
 
+import { Config } from "../../../../Config";
 import { Property } from "../../../../Interface";
 
 export const useTicker = (currentId: number) => {
@@ -10,7 +11,7 @@ export const useTicker = (currentId: number) => {
   const [properties, setProperties] = useState<Property[]>([]);
 
   const [{ data, loading }, refetch] = useAxios(
-    `http://127.0.0.1:8000/api/v1/property/?exclude=${currentId}`
+    `${Config.API_URL}/property/?exclude=${currentId}`
   );
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxios from "axios-hooks";
 
+import { Config } from "../../../../Config";
 import { UserBids } from "../../../../Interface";
 
 export const useGetUserBids = () => {
@@ -14,7 +15,7 @@ export const useGetUserBids = () => {
   };
   const [userBids, setUserBids] = useState<UserBids>(initialData);
 
-  const [{ data }] = useAxios("http://127.0.0.1:8000/api/v1/users/2/bids");
+  const [{ data }] = useAxios(`${Config.API_URL}/users/2/bids`);
 
   useEffect(() => {
     if (data) {
