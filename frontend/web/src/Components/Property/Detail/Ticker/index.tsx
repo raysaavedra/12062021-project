@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import { Stat } from "./Stat";
