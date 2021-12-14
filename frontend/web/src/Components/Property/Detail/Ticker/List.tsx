@@ -7,7 +7,7 @@ import { ListItem } from "./ListItem";
 
 const useStyles = makeStyles({
   stack: {
-    padding: "0 20px",
+    height: "100%",
   },
   container: {
     display: "flex",

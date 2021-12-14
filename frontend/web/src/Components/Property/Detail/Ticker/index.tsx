@@ -16,14 +16,26 @@ const useStyles = makeStyles({
     flexDirection: "row",
   },
   statsContainer: {
-    width: "400px",
+    width: "402px",
     background: "#FFFFFF",
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   statsGrid: {
-    padding: "5px 23px",
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    flexDirection: "column",
   },
   listContainer: {
+    width: "1756px",
+    height: "60px",
     background: "rgba(255, 255, 255, 0.5)",
+  },
+  statsGridStart: {
+    paddingLeft: "25px",
   },
 });
 
@@ -39,42 +51,50 @@ export const Ticker: FC<TickerProps> = ({ property }) => {
   return (
     <Box className={classes.container}>
       <Box className={classes.statsContainer}>
-        <Grid container className={classes.statsGrid}>
-          <Grid item xs={4}>
-            <Stat name="Outbid" value={userBids.outbid} useRed />
-          </Grid>
-          <Grid item xs={4}>
-            <Stat name="Active" value={userBids.active} useDefault />
-          </Grid>
-          <Grid item xs={4}>
-            <Stat name="Winning" value={userBids.winning} />
-          </Grid>
-        </Grid>
+        <Box
+          width="171px"
+          className={`${classes.statsGrid} ${classes.statsGridStart}`}
+        >
+          <Stat name="Outbid" value={userBids.outbid} useRed />
+        </Box>
+        <Box width="140px" className={classes.statsGrid}>
+          <Stat name="Active" value={userBids.active} useDefault />
+        </Box>
+        <Box width="91px" className={classes.statsGrid}>
+          <Stat name="Winning" value={userBids.winning} useGreen />
+        </Box>
       </Box>
-      <Box className={classes.listContainer} flexGrow={1}>
+      <Box className={classes.listContainer}>
         <List properties={properties} />
       </Box>
       <Box className={classes.statsContainer}>
-        <Grid container className={classes.statsGrid}>
-          <Grid item xs={4}>
-            <Stat name="Winning" value={property.winning_bid} withDollar />
-          </Grid>
-          <Grid item xs={4}>
-            <Stat
-              name="Active"
-              value={property.current_user_bid.active}
-              useDefault
-              withDollar
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Stat
-              name="Outbid"
-              value={property.current_user_bid.outbid}
-              withDollar
-            />
-          </Grid>
-        </Grid>
+        <Box
+          width="159px"
+          className={`${classes.statsGrid} ${classes.statsGridStart}`}
+        >
+          <Stat
+            name="Winning"
+            value={property.winning_bid}
+            withDollar
+            useGreen
+          />
+        </Box>
+        <Box width="135px" className={classes.statsGrid}>
+          <Stat
+            name="Active"
+            value={property.current_user_bid.active}
+            useDefault
+            withDollar
+          />
+        </Box>
+        <Box width="108px" className={classes.statsGrid}>
+          <Stat
+            name="Outbid"
+            value={property.current_user_bid.outbid}
+            useRed
+            withDollar
+          />
+        </Box>
       </Box>
     </Box>
   );

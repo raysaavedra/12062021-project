@@ -13,29 +13,48 @@ const useStyles = makeStyles({
     flexDirection: "column",
     padding: "5px 70px",
     cursor: "pointer",
+    alignItems: "center",
+    justifyContent: "center",
   },
   bold: {
-    fontWeight: "bold !important",
+    height: "19px",
+    fontFamily: "Poppins !important",
+    fontStyle: "normal !important",
+    fontWeight: "500 !important",
     fontSize: "18px !important",
-    color: "#171518",
+    lineHeight: "19px !important",
+    letterSpacing: "0.782609px !important",
+    color: "#171518 !important",
   },
   normal: {
+    fontFamily: "Poppins !important",
+    fontStyle: "normal !important",
+    fontWeight: "500 !important",
+    fontSize: "18px !important",
+    lineHeight: "19px !important",
+    letterSpacing: "0.782609px !important",
+  },
+  normal2: {
+    color: "#484848 !important",
+    fontFamily: "Poppins !important",
+    fontStyle: "normal !important",
     fontWeight: "200 !important",
     fontSize: "18px !important",
-    color: "#171518",
+    lineHeight: "19px !important",
+    letterSpacing: "0.782609px !important",
   },
   icon: {
     width: "13px !important",
     height: "13px !important",
   },
   red: {
-    color: "#E91C1C",
+    color: "#E91C1C !important",
   },
   green: {
-    color: "#00EB3E",
+    color: "#00EB3E !important",
   },
   default: {
-    color: "#8F8F8F",
+    color: "#8F8F8F !important",
   },
 });
 
@@ -84,20 +103,15 @@ export const ListItem: FC<ListItemProps> = ({ property }) => {
           </Box>
         ) : null}
 
-        <Typography variant="body2" className={classes.bold}>
-          {property.address}
-        </Typography>
+        <Typography className={classes.bold}>{property.address}</Typography>
       </Box>
       <Box
         display="flex"
         flexDirection="row"
         justifyContent="center"
         alignItems="center"
-        pl="20px"
-        pr="15px"
       >
         <Typography
-          variant="body2"
           className={clsx({
             [classes.bold]: true,
             [classes.green]: property.last_bid && property.last_bid > 0,
@@ -111,7 +125,7 @@ export const ListItem: FC<ListItemProps> = ({ property }) => {
             : `$${property.last_bid}`}
         </Typography>
         <Box pl="15px">
-          <Typography variant="body2" className={classes.normal}>
+          <Typography className={classes.normal2}>
             {`$${property.market_value}`}
           </Typography>
         </Box>

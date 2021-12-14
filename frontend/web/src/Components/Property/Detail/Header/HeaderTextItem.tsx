@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -8,13 +8,31 @@ const useStyles = makeStyles({
     width: "100%",
   },
   normal: {
+    fontFamily: "Poppins",
+    fontStyle: "normal !important",
+    fontWeight: "200 !important",
     fontSize: "18px !important",
-    color: "#484848",
+    lineHeight: "27px !important",
+    textAlign: "center",
+    letterSpacing: "2px !important",
+    color: "#484848 !important",
+    padding: 0,
+    margin: 0,
   },
   bold: {
+    fontFamily: "Poppins !important",
+    fontStyle: "normal !important",
+    fontWeight: "300 !important",
     fontSize: "46px !important",
-    fontWeight: "bold !important",
-    color: "#171518",
+    lineHeight: "69px !important",
+    textAlign: "center",
+    letterSpacing: "2px !important",
+    color: "#171518 !important",
+    padding: 0,
+    margin: 0,
+    display: "inline",
+    marginTop: "-10px",
+    marginBottom: "-10px",
   },
 });
 
@@ -34,42 +52,26 @@ export const HeaderTextItem: FC<HeaderTextItemProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      direction="column"
+    <Box
       className={classes.gridContainer}
       display="flex"
       alignItems="center"
       justifyContent="center"
+      flexDirection="column"
     >
-      <Grid item>
-        <Typography variant="body2" className={classes.normal}>
-          {topText}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Typography variant="h6" className={classes.bold}>
-          {middleText}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Typography variant="body2" className={classes.normal}>
-          {bottomText}
-        </Typography>
-      </Grid>
+      <p className={classes.normal}>{topText}</p>
+      <p className={classes.bold}>{middleText}</p>
+      <p className={classes.normal}>{bottomText}</p>
       {extraBottomIcon && (
-        <Grid item>
-          <Box
-            pt="10px"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            {extraBottomIcon}
-          </Box>
-        </Grid>
+        <Box
+          pt="10px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {extraBottomIcon}
+        </Box>
       )}
-    </Grid>
+    </Box>
   );
 };

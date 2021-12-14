@@ -5,18 +5,23 @@ import clsx from "clsx";
 
 const useStyles = makeStyles({
   bold: {
-    fontWeight: "bold !important",
+    height: "19px",
+    fontFamily: "Poppins !important",
+    fontStyle: "normal !important",
+    fontWeight: "500 !important",
     fontSize: "18px !important",
-    color: "#171518",
+    lineHeight: "19px !important",
+    letterSpacing: "0.782609px !important",
+    color: "#171518 !important",
   },
   red: {
-    color: "#E91C1C",
+    color: "#E91C1C !important",
   },
   green: {
-    color: "#00EB3E",
+    color: "#00EB3E !important",
   },
   default: {
-    color: "#8F8F8F",
+    color: "#8F8F8F !important",
   },
 });
 
@@ -25,6 +30,7 @@ interface StatProps {
   value: number;
   useDefault?: boolean;
   useRed?: boolean;
+  useGreen?: boolean;
   withDollar?: boolean;
 }
 
@@ -33,34 +39,31 @@ export const Stat: FC<StatProps> = ({
   value,
   useDefault,
   useRed,
+  useGreen,
   withDollar,
 }) => {
   const classes = useStyles();
+
+  console.log(useRed, value, name);
   return (
     <>
       <Box display="flex" alignItems="center" justifyContent="flex-left">
         <Typography className={classes.bold}>{name}</Typography>
       </Box>
-      <Box
-        pl="3px"
-        display="flex"
-        alignItems="center"
-        justifyContent="flex-left"
-      >
+      <Box display="flex" alignItems="center" justifyContent="flex-left">
         <Typography
           className={clsx({
             [classes.bold]: true,
-            [classes.default]: useDefault,
             [classes.red]: useRed,
-            [classes.green]: !useDefault && !useRed && value > 0,
-            [classes.red]: !useDefault && !useRed && value < 0,
+            [classes.green]: useGreen,
+            [classes.default]: useDefault,
           })}
         >
           {withDollar
             ? value < 0
-              ? value.toString().replace("-", "-$")
-              : `$${value}`
-            : value}
+              ? value.toString().replace("-", "$")
+              : `$${value || 0}`
+            : value || 0}
         </Typography>
       </Box>
     </>
